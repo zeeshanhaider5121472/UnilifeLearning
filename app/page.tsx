@@ -132,13 +132,13 @@ export default function HomePage() {
                   transition={{ duration: 3, repeat: Infinity }}
                 />
                 <MonsterMascot size={200} color="purple" />
-                <motion.div
+                {/* <motion.div
                   className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-sm text-violet-600 dark:text-violet-300 glass px-4 py-2 rounded-full"
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   👆 Click me!
-                </motion.div>
+                </motion.div> */}
               </div>
             </motion.div>
           </div>
