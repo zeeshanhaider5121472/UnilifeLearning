@@ -37,7 +37,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen animated-bg relative overflow-hidden">
-      <FloatingShapes />
+      <FloatingShapes />  
 
       {/* Navbar */}
       <motion.nav
@@ -52,9 +52,9 @@ export default function HomePage() {
             whileHover={{ scale: 1.05 }}
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">
-              R
+              UL
             </div>
-            <span className="text-xl font-bold gradient-text">ResultHub</span>
+            <span className="text-xl font-bold gradient-text">UniLife Learning</span>
           </motion.div>
 
           <div className="flex items-center gap-4">

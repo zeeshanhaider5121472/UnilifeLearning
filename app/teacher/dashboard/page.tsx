@@ -17,10 +17,12 @@ import toast from "react-hot-toast";
 import {
   FiBarChart2,
   FiCheck,
+  FiChevronLeft,
   FiChevronRight,
   FiEdit2,
   FiFileText,
   FiLogOut,
+  FiMenu,
   FiPlus,
   FiSearch,
   FiTrash2,
@@ -56,6 +58,7 @@ export default function TeacherDashboard() {
   const [students, setStudents] = useState<User[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<User | null>(null);
   const [results, setResults] = useState<Result[]>([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingResult, setEditingResult] = useState<Result | null>(null);
   const [expandedTask, setExpandedTask] = useState<number | null>(null);
@@ -290,13 +293,27 @@ export default function TeacherDashboard() {
     );
 
   return (
-    <div className="min-h-screen animated-bg flex">
+    <div className="min-h-screen animated-bg flex overflow-hidden">
+      {/* Sidebar Toggle Button (Floating when closed) */}
+      {!isSidebarOpen && (
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="fixed top-6 left-6 z-50 p-3 rounded-xl bg-violet-600 text-white shadow-lg hover:scale-110 transition-transform"
+        >
+          <FiMenu size={20} />
+        </button>
+      )}
+
       {/* Sidebar */}
       <motion.aside
-        className="w-80 glass-strong border-r border-slate-200 dark:border-white/5 flex flex-col h-screen sticky top-0"
-        initial={{ x: -320 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="glass-strong border-r border-slate-200 dark:border-white/5 flex flex-col h-screen sticky top-0 z-40"
+        // initial={{ x: -320 }}
+        initial={false}
+        animate={{
+          width: isSidebarOpen ? 340 : 0,
+          x: isSidebarOpen ? 0 : -340,
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         <div className="p-6 border-b border-slate-200 dark:border-white/5">
           <div className="flex items-center gap-3 mb-4">
@@ -309,7 +326,13 @@ export default function TeacherDashboard() {
               </h2>
               <p className="text-xs text-violet-400">{user.subject} Teacher</p>
             </div>
-          <ThemeToggle />
+            <ThemeToggle />
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="p-2 hover:bg-white/10 rounded-lg text-slate-500"
+            >
+              <FiChevronLeft size={20} />
+            </button>
           </div>
           <button
             onClick={() => {
