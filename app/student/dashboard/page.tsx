@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/AuthProvider";
 import MonsterMascot from "@/components/MonsterMascot";
+import ThemeToggle from "@/components/ThemeToggle";
 import { getResults, updateResult } from "@/lib/api";
 import { Result } from "@/lib/types";
 import { AnimatePresence, motion } from "framer-motion";
@@ -239,7 +240,7 @@ export default function StudentDashboard() {
       >
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-white font-bold">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center text-slate-900 dark:text-white font-bold">
               R
             </div>
             <span className="text-lg font-bold gradient-text">
@@ -247,9 +248,10 @@ export default function StudentDashboard() {
             </span>
           </div>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <div className="flex items-center gap-2 glass rounded-xl px-4 py-2">
               <span className="text-lg">{user.avatar || "👤"}</span>
-              <span className="text-sm font-semibold text-white">
+              <span className="text-sm font-semibold text-slate-900 dark:text-white">
                 {user.name}
               </span>
             </div>
@@ -258,7 +260,7 @@ export default function StudentDashboard() {
                 logout();
                 router.push("/");
               }}
-              className="p-2.5 rounded-xl hover:bg-white/5 text-gray-400 hover:text-red-400 transition"
+              className="p-2.5 rounded-xl hover:bg-white/50 dark:bg-white/5 text-slate-600 dark:text-gray-400 hover:text-red-400 transition"
             >
               <FiLogOut />
             </button>
@@ -284,7 +286,7 @@ export default function StudentDashboard() {
                 Hey {user.name.split(" ")[0]}!
               </span>
             </h1>
-            <p className="text-gray-400 text-lg mb-4">
+            <p className="text-slate-600 dark:text-gray-400 text-lg mb-4">
               Ready to check your results? Let&apos;s see how you&apos;re doing!
               ✨
             </p>
@@ -293,8 +295,8 @@ export default function StudentDashboard() {
                 onClick={() => setActiveTab("overview")}
                 className={`px-5 py-2 rounded-xl font-semibold text-sm transition-all ${
                   activeTab === "overview"
-                    ? "bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-lg shadow-teal-500/25"
-                    : "glass text-gray-400 hover:text-white"
+                    ? "bg-gradient-to-r from-teal-600 to-cyan-600 text-slate-900 dark:text-white shadow-lg shadow-teal-500/25"
+                    : "glass text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white"
                 }`}
               >
                 📊 Overview
@@ -303,8 +305,8 @@ export default function StudentDashboard() {
                 onClick={() => setActiveTab("tasks")}
                 className={`px-5 py-2 rounded-xl font-semibold text-sm transition-all ${
                   activeTab === "tasks"
-                    ? "bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-lg shadow-teal-500/25"
-                    : "glass text-gray-400 hover:text-white"
+                    ? "bg-gradient-to-r from-teal-600 to-cyan-600 text-slate-900 dark:text-white shadow-lg shadow-teal-500/25"
+                    : "glass text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white"
                 }`}
               >
                 📝 My Tasks
@@ -367,18 +369,20 @@ export default function StudentDashboard() {
                       />
                     </div>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs text-gray-500 uppercase tracking-wider">
+                      <span className="text-xs text-slate-500 dark:text-gray-500 uppercase tracking-wider">
                         {stat.label}
                       </span>
                       <div
-                        className={`w-8 h-8 rounded-lg bg-gradient-to-br ${stat.gradient} flex items-center justify-center text-white text-sm`}
+                        className={`w-8 h-8 rounded-lg bg-gradient-to-br ${stat.gradient} flex items-center justify-center text-slate-900 dark:text-white text-sm`}
                       >
                         {stat.icon}
                       </div>
                     </div>
                     <p
                       className={`${stat.big ? "text-3xl" : "text-2xl"} font-bold ${
-                        stat.label === "Grade" ? gradeInfo.color : "text-white"
+                        stat.label === "Grade"
+                          ? gradeInfo.color
+                          : "text-slate-900 dark:text-white"
                       }`}
                     >
                       {stat.value}
@@ -409,7 +413,7 @@ export default function StudentDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     📈 Performance Trend
                   </h3>
                   {trendData.length > 0 ? (
@@ -446,7 +450,7 @@ export default function StudentDashboard() {
                       </BarChart>
                     </ResponsiveContainer>
                   ) : (
-                    <div className="h-[260px] flex items-center justify-center text-gray-500">
+                    <div className="h-[260px] flex items-center justify-center text-slate-500 dark:text-gray-500">
                       Complete some tasks to see your trend! 📊
                     </div>
                   )}
@@ -459,7 +463,7 @@ export default function StudentDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     🎯 Subject Radar
                   </h3>
                   {radarData.length > 1 ? (
@@ -486,7 +490,7 @@ export default function StudentDashboard() {
                       </RadarChart>
                     </ResponsiveContainer>
                   ) : (
-                    <div className="h-[260px] flex flex-col items-center justify-center text-gray-500">
+                    <div className="h-[260px] flex flex-col items-center justify-center text-slate-500 dark:text-gray-500">
                       <p>Need results in multiple subjects</p>
                       <p className="text-sm">
                         for the radar chart to appear 🎯
@@ -504,7 +508,7 @@ export default function StudentDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     📊 Task Status
                   </h3>
                   {statusData.length > 0 ? (
@@ -538,7 +542,7 @@ export default function StudentDashboard() {
                         {statusData.map((d, i) => (
                           <div
                             key={i}
-                            className="flex items-center gap-1.5 text-xs text-gray-400"
+                            className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-gray-400"
                           >
                             <div
                               className="w-2.5 h-2.5 rounded-full"
@@ -550,7 +554,7 @@ export default function StudentDashboard() {
                       </div>
                     </>
                   ) : (
-                    <div className="h-[220px] flex items-center justify-center text-gray-500">
+                    <div className="h-[220px] flex items-center justify-center text-slate-500 dark:text-gray-500">
                       No tasks yet
                     </div>
                   )}
@@ -563,7 +567,7 @@ export default function StudentDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.7 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     📚 Subject Breakdown
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -582,7 +586,7 @@ export default function StudentDashboard() {
                             <div className="text-3xl mb-2">
                               {SUBJECT_EMOJIS[subject] || "📖"}
                             </div>
-                            <p className="font-bold text-white text-sm mb-1">
+                            <p className="font-bold text-slate-900 dark:text-white text-sm mb-1">
                               {subject}
                             </p>
                             <p className={`text-xl font-black ${g.color}`}>
@@ -591,7 +595,7 @@ export default function StudentDashboard() {
                             <p className={`text-xs font-semibold ${g.color}`}>
                               {g.grade}
                             </p>
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-slate-500 dark:text-gray-500 mt-1">
                               {count} tasks
                             </p>
                           </motion.div>
@@ -599,7 +603,7 @@ export default function StudentDashboard() {
                       },
                     )}
                     {subjectMap.size === 0 && (
-                      <div className="col-span-full py-8 text-center text-gray-500">
+                      <div className="col-span-full py-8 text-center text-slate-500 dark:text-gray-500">
                         No completed tasks yet. Start submitting! 🚀
                       </div>
                     )}
@@ -622,14 +626,14 @@ export default function StudentDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
-                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                   <span className="text-amber-400">⏳</span> Remaining Tasks (
                   {remainingTasks.length})
                 </h2>
                 {remainingTasks.length === 0 ? (
                   <div className="glass rounded-2xl p-8 text-center">
                     <p className="text-4xl mb-3">🎉</p>
-                    <p className="text-gray-400">
+                    <p className="text-slate-600 dark:text-gray-400">
                       All tasks completed! Great job!
                     </p>
                   </div>
@@ -659,16 +663,16 @@ export default function StudentDashboard() {
                               {isNotCompleted ? "📝" : "⏳"}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="font-bold text-white truncate">
+                              <p className="font-bold text-slate-900 dark:text-white truncate">
                                 {task.taskName}
                               </p>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-xs text-gray-500 flex items-center gap-1">
+                                <span className="text-xs text-slate-500 dark:text-gray-500 flex items-center gap-1">
                                   {SUBJECT_EMOJIS[task.subject] || "📖"}{" "}
                                   {task.subject}
                                 </span>
                                 <span className="text-xs text-gray-600">•</span>
-                                <span className="text-xs text-gray-500">
+                                <span className="text-xs text-slate-500 dark:text-gray-500">
                                   {task.totalMarks} marks
                                 </span>
                               </div>
@@ -710,8 +714,8 @@ export default function StudentDashboard() {
                             </div>
                           </div>
                           {task.studentSubmission && (
-                            <div className="mt-3 pt-3 border-t border-white/5">
-                              <p className="text-xs text-gray-500">
+                            <div className="mt-3 pt-3 border-t border-slate-200 dark:border-white/5">
+                              <p className="text-xs text-slate-500 dark:text-gray-500">
                                 Your submission:
                               </p>
                               <p className="text-xs text-gray-300 truncate">
@@ -732,14 +736,14 @@ export default function StudentDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
                   <span className="text-emerald-400">✅</span> Completed Tasks (
                   {completedTasks.length})
                 </h2>
                 {completedTasks.length === 0 ? (
                   <div className="glass rounded-2xl p-8 text-center">
                     <p className="text-4xl mb-3">📚</p>
-                    <p className="text-gray-400">
+                    <p className="text-slate-600 dark:text-gray-400">
                       No completed tasks yet. Submit your work!
                     </p>
                   </div>
@@ -771,24 +775,24 @@ export default function StudentDashboard() {
                               {g.emoji}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <p className="font-bold text-white truncate">
+                              <p className="font-bold text-slate-900 dark:text-white truncate">
                                 {task.taskName}
                               </p>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-xs text-gray-500 flex items-center gap-1">
+                                <span className="text-xs text-slate-500 dark:text-gray-500 flex items-center gap-1">
                                   {SUBJECT_EMOJIS[task.subject] || "📖"}{" "}
                                   {task.subject}
                                 </span>
                                 <span className="text-xs text-gray-600">•</span>
-                                <span className="text-xs text-gray-500">
+                                <span className="text-xs text-slate-500 dark:text-gray-500">
                                   {task.createdAt}
                                 </span>
                               </div>
                             </div>
                             <div className="text-right">
-                              <p className="text-lg font-black text-white">
+                              <p className="text-lg font-black text-slate-900 dark:text-white">
                                 {task.marks}
-                                <span className="text-sm text-gray-500">
+                                <span className="text-sm text-slate-500 dark:text-gray-500">
                                   /{task.totalMarks}
                                 </span>
                               </p>
@@ -800,7 +804,7 @@ export default function StudentDashboard() {
                               animate={{ rotate: isExpanded ? 90 : 0 }}
                               transition={{ duration: 0.2 }}
                             >
-                              <FiChevronRight className="text-gray-500" />
+                              <FiChevronRight className="text-slate-500 dark:text-gray-500" />
                             </motion.div>
                           </button>
 
@@ -812,11 +816,11 @@ export default function StudentDashboard() {
                                 exit={{ height: 0, opacity: 0 }}
                                 className="overflow-hidden"
                               >
-                                <div className="px-5 pb-5 border-t border-white/5 pt-4">
+                                <div className="px-5 pb-5 border-t border-slate-200 dark:border-white/5 pt-4">
                                   {/* Progress bar */}
                                   <div className="mb-4">
                                     <div className="flex justify-between text-xs mb-1">
-                                      <span className="text-gray-500">
+                                      <span className="text-slate-500 dark:text-gray-500">
                                         Score
                                       </span>
                                       <span
@@ -843,15 +847,15 @@ export default function StudentDashboard() {
 
                                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                                     <div>
-                                      <p className="text-xs text-gray-500 mb-1">
+                                      <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                         Marks
                                       </p>
-                                      <p className="font-bold text-white">
+                                      <p className="font-bold text-slate-900 dark:text-white">
                                         {task.marks}/{task.totalMarks}
                                       </p>
                                     </div>
                                     <div>
-                                      <p className="text-xs text-gray-500 mb-1">
+                                      <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                         Grade
                                       </p>
                                       <p className={`font-bold ${g.color}`}>
@@ -859,7 +863,7 @@ export default function StudentDashboard() {
                                       </p>
                                     </div>
                                     <div>
-                                      <p className="text-xs text-gray-500 mb-1">
+                                      <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                         Locked
                                       </p>
                                       <p
@@ -869,7 +873,7 @@ export default function StudentDashboard() {
                                       </p>
                                     </div>
                                     <div>
-                                      <p className="text-xs text-gray-500 mb-1">
+                                      <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                         Submitted
                                       </p>
                                       <p className="text-sm text-gray-300">
@@ -880,7 +884,7 @@ export default function StudentDashboard() {
 
                                   {task.studentSubmission && (
                                     <div className="mb-4">
-                                      <p className="text-xs text-gray-500 mb-1">
+                                      <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                         Your Submission
                                       </p>
                                       {task.submissionType === "jpg" ||
@@ -888,7 +892,7 @@ export default function StudentDashboard() {
                                         <img
                                           src={task.studentSubmission}
                                           alt="submission"
-                                          className="max-w-xs rounded-xl border border-white/10"
+                                          className="max-w-xs rounded-xl border border-slate-200 dark:border-white/10"
                                         />
                                       ) : (
                                         <div className="glass rounded-xl p-3 text-sm text-gray-300">
@@ -900,13 +904,13 @@ export default function StudentDashboard() {
 
                                   {task.screenshot && (
                                     <div className="mb-4">
-                                      <p className="text-xs text-gray-500 mb-1">
+                                      <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                         Teacher Screenshot
                                       </p>
                                       <img
                                         src={task.screenshot}
                                         alt="result"
-                                        className="max-w-xs rounded-xl border border-white/10"
+                                        className="max-w-xs rounded-xl border border-slate-200 dark:border-white/10"
                                       />
                                     </div>
                                   )}
@@ -961,8 +965,10 @@ export default function StudentDashboard() {
                   {SUBJECT_EMOJIS[submittingTask.subject] || "📖"}
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-white">Submit Task</h2>
-                  <p className="text-sm text-gray-400">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                    Submit Task
+                  </h2>
+                  <p className="text-sm text-slate-600 dark:text-gray-400">
                     {submittingTask.taskName} — {submittingTask.subject}
                   </p>
                 </div>
@@ -993,7 +999,7 @@ export default function StudentDashboard() {
                     className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm transition ${
                       submissionType === opt.type
                         ? "bg-teal-500/20 text-teal-400 border border-teal-500/30"
-                        : "glass text-gray-400 hover:text-white"
+                        : "glass text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white"
                     }`}
                   >
                     {opt.icon} {opt.label}
@@ -1007,14 +1013,14 @@ export default function StudentDashboard() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <label className="text-sm text-gray-400 mb-2 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-2 block">
                     Type your answer
                   </label>
                   <textarea
                     value={submissionText}
                     onChange={(e) => setSubmissionText(e.target.value)}
                     rows={6}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-teal-500 resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-gray-500 focus:border-teal-500 resize-none"
                     placeholder="Write your answer here..."
                   />
                 </motion.div>
@@ -1026,14 +1032,14 @@ export default function StudentDashboard() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <label className="text-sm text-gray-400 mb-2 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-2 block">
                     Upload {submissionType === "jpg" ? "an image" : "a file"}
                   </label>
-                  <label className="flex flex-col items-center gap-3 px-6 py-8 rounded-xl border-2 border-dashed border-white/10 hover:border-teal-500/50 cursor-pointer transition group">
+                  <label className="flex flex-col items-center gap-3 px-6 py-8 rounded-xl border-2 border-dashed border-slate-200 dark:border-white/10 hover:border-teal-500/50 cursor-pointer transition group">
                     <div className="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-400 text-xl group-hover:scale-110 transition">
                       <FiUpload />
                     </div>
-                    <span className="text-sm text-gray-400 group-hover:text-teal-400 transition">
+                    <span className="text-sm text-slate-600 dark:text-gray-400 group-hover:text-teal-400 transition">
                       Click to upload{" "}
                       {submissionType === "jpg" ? "(JPG, PNG)" : "(PDF, DOC)"}
                     </span>
@@ -1052,7 +1058,7 @@ export default function StudentDashboard() {
                         <img
                           src={submissionFile}
                           alt="preview"
-                          className="max-w-full rounded-xl border border-white/10"
+                          className="max-w-full rounded-xl border border-slate-200 dark:border-white/10"
                         />
                       ) : (
                         <div className="glass rounded-xl p-3 text-sm text-teal-400">
@@ -1067,13 +1073,13 @@ export default function StudentDashboard() {
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setShowSubmitModal(false)}
-                  className="flex-1 py-3 rounded-xl border border-white/10 text-gray-400 font-semibold hover:bg-white/5 transition"
+                  className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 font-semibold hover:bg-white/50 dark:bg-white/5 transition"
                 >
                   Cancel
                 </button>
                 <motion.button
                   onClick={handleSubmitTask}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-cyan-600 text-slate-900 dark:text-white font-semibold hover:shadow-lg hover:shadow-teal-500/25 transition"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >

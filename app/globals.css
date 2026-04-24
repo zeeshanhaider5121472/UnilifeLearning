@@ -3,11 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0a0a1a;
-  --bg-secondary: #111128;
-  --accent-purple: #8b5cf6;
+  /* 60-30-10 Light Theme Variables */
+  --bg-primary: #f8fafc; /* 60% Dominant */
+  --bg-secondary: #ffffff; /* 30% Secondary (Cards) */
+  --text-primary: #1e293b; /* 30% Secondary (Text) */
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --accent-purple: #8b5cf6; /* 10% Accent */
   --accent-teal: #14b8a6;
   --accent-amber: #f59e0b;
+}
+
+.dark {
+  --bg-primary: #0a0a1a;
+  --bg-secondary: #111128;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -22,9 +34,10 @@ html {
 
 body {
   background: var(--bg-primary);
-  color: #e2e8f0;
+  color: var(--text-primary);
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom scrollbar */
@@ -32,6 +45,9 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dark ::-webkit-scrollbar-track {
   background: #1a1a3e;
 }
 ::-webkit-scrollbar-thumb {
@@ -47,18 +63,29 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Glassmorphism */
+/* Glassmorphism - Adapts to theme */
 .glass {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+}
+.dark .glass {
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
+
 .glass-strong {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.dark .glass-strong {
+  background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
 }
 
 /* Gradient text */
@@ -68,25 +95,18 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.gradient-text-purple {
-  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.gradient-text-teal {
-  background: linear-gradient(135deg, #5eead4, #14b8a6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
 
 /* Animated gradient background */
 .animated-bg {
-  background: linear-gradient(-45deg, #0a0a1a, #1a0a3a, #0a1a3a, #0a0a2a);
+  background: linear-gradient(-45deg, #f8fafc, #eef2ff, #f0fdfa, #faf5ff);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
+.dark .animated-bg {
+  background: linear-gradient(-45deg, #0a0a1a, #1a0a3a, #0a1a3a, #0a0a2a);
+  background-size: 400% 400%;
+}
+
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -95,34 +115,27 @@ body {
 
 /* Glow effects */
 .glow-purple {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+}
+.dark .glow-purple {
   box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 0 60px rgba(139, 92, 246, 0.1);
-}
-.glow-teal {
-  box-shadow: 0 0 30px rgba(20, 184, 166, 0.3), 0 0 60px rgba(20, 184, 166, 0.1);
-}
-.glow-amber {
-  box-shadow: 0 0 30px rgba(245, 158, 11, 0.3), 0 0 60px rgba(245, 158, 11, 0.1);
 }
 
 /* 3D cube */
-.cube-container {
-  perspective: 800px;
-}
+.cube-container { perspective: 800px; }
 .cube {
-  width: 60px;
-  height: 60px;
-  position: relative;
-  transform-style: preserve-3d;
+  width: 60px; height: 60px;
+  position: relative; transform-style: preserve-3d;
   animation: rotateCube 12s linear infinite;
 }
 .cube-face {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  border: 2px solid rgba(139, 92, 246, 0.4);
-  background: rgba(139, 92, 246, 0.08);
+  position: absolute; width: 60px; height: 60px;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.05);
   border-radius: 4px;
 }
+.dark .cube-face { border-color: rgba(139, 92, 246, 0.4); background: rgba(139, 92, 246, 0.08); }
+
 .cube-face-front  { transform: translateZ(30px); }
 .cube-face-back   { transform: rotateY(180deg) translateZ(30px); }
 .cube-face-right  { transform: rotateY(90deg) translateZ(30px); }
@@ -135,52 +148,23 @@ body {
   to { transform: rotateX(360deg) rotateY(360deg); }
 }
 
-/* Pyramid */
-.pyramid-container {
-  perspective: 800px;
-}
-.pyramid {
-  width: 60px;
-  height: 60px;
-  position: relative;
-  transform-style: preserve-3d;
-  animation: rotatePyramid 15s linear infinite;
-}
-@keyframes rotatePyramid {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
-}
-
 /* Input focus ring */
 input:focus, textarea:focus, select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
 }
 
 /* Shine effect on cards */
-.shine-effect {
-  position: relative;
-  overflow: hidden;
-}
+.shine-effect { position: relative; overflow: hidden; }
 .shine-effect::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 40%,
-    rgba(255,255,255,0.05) 50%,
-    transparent 60%
-  );
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
+  transform: translateX(-100%); transition: transform 0.6s ease;
 }
-.shine-effect:hover::before {
-  transform: translateX(100%);
+.dark .shine-effect::before {
+  background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
 }
+.shine-effect:hover::before { transform: translateX(100%); }
 
 /* Confetti */
 @keyframes confettiFall {
@@ -188,9 +172,6 @@ input:focus, textarea:focus, select:focus {
   100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 .confetti-piece {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  top: -10px;
+  position: fixed; width: 10px; height: 10px; top: -10px;
   animation: confettiFall 3s linear forwards;
 }

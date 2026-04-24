@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   createUser,
   deleteUser,
@@ -276,7 +277,7 @@ export default function AdminDashboard() {
       >
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-bold">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-slate-900 dark:text-white font-bold">
               R
             </div>
             <span className="text-lg font-bold gradient-text">
@@ -286,16 +287,17 @@ export default function AdminDashboard() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 glass rounded-xl px-4 py-2">
               <span className="text-lg">🛡️</span>
-              <span className="text-sm font-semibold text-white">
+              <span className="text-sm font-semibold text-slate-900 dark:text-white">
                 {user.name}
               </span>
             </div>
+            <ThemeToggle />
             <button
               onClick={() => {
                 logout();
                 router.push("/");
               }}
-              className="p-2.5 rounded-xl hover:bg-white/5 text-gray-400 hover:text-red-400 transition"
+              className="p-2.5 rounded-xl hover:bg-white/50 dark:bg-white/5 text-slate-600 dark:text-gray-400 hover:text-red-400 transition"
             >
               <FiLogOut />
             </button>
@@ -331,8 +333,8 @@ export default function AdminDashboard() {
               }}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all whitespace-nowrap ${
                 activeTab === tab.key
-                  ? "bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg shadow-amber-500/25"
-                  : "glass text-gray-400 hover:text-white"
+                  ? "bg-gradient-to-r from-amber-600 to-orange-600 text-slate-900 dark:text-white shadow-lg shadow-amber-500/25"
+                  : "glass text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white"
               }`}
             >
               {tab.label}
@@ -385,12 +387,12 @@ export default function AdminDashboard() {
                     whileHover={{ y: -4, scale: 1.02 }}
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs text-gray-500 uppercase tracking-wider">
+                      <span className="text-xs text-slate-500 dark:text-gray-500 uppercase tracking-wider">
                         {stat.label}
                       </span>
                       <span className="text-2xl">{stat.emoji}</span>
                     </div>
-                    <p className="text-3xl font-black text-white">
+                    <p className="text-3xl font-black text-slate-900 dark:text-white">
                       {stat.value}
                     </p>
                   </motion.div>
@@ -404,7 +406,7 @@ export default function AdminDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     Users Distribution
                   </h3>
                   <ResponsiveContainer width="100%" height={220}>
@@ -436,7 +438,7 @@ export default function AdminDashboard() {
                     {roleData.map((d, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 text-sm text-gray-400"
+                        className="flex items-center gap-2 text-sm text-slate-600 dark:text-gray-400"
                       >
                         <div
                           className="w-3 h-3 rounded-full"
@@ -454,7 +456,7 @@ export default function AdminDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     Task Status
                   </h3>
                   <ResponsiveContainer width="100%" height={220}>
@@ -486,7 +488,7 @@ export default function AdminDashboard() {
                     {taskStatusData.map((d, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 text-xs text-gray-400"
+                        className="flex items-center gap-2 text-xs text-slate-600 dark:text-gray-400"
                       >
                         <div
                           className="w-2.5 h-2.5 rounded-full"
@@ -504,7 +506,7 @@ export default function AdminDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     Subject Stats
                   </h3>
                   {subjectData.length > 0 ? (
@@ -541,7 +543,7 @@ export default function AdminDashboard() {
                       </BarChart>
                     </ResponsiveContainer>
                   ) : (
-                    <div className="h-[220px] flex items-center justify-center text-gray-500">
+                    <div className="h-[220px] flex items-center justify-center text-slate-500 dark:text-gray-500">
                       No data
                     </div>
                   )}
@@ -557,7 +559,7 @@ export default function AdminDashboard() {
                   transition={{ delay: 0.7 }}
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-white">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                       Recent Students
                     </h3>
                     <button
@@ -575,14 +577,14 @@ export default function AdminDashboard() {
                           setActiveTab("students");
                           handleSelectUser(s);
                         }}
-                        className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition text-left"
+                        className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/50 dark:bg-white/5 transition text-left"
                       >
                         <span className="text-lg">{s.avatar}</span>
                         <div className="flex-1">
-                          <p className="text-sm font-semibold text-white">
+                          <p className="text-sm font-semibold text-slate-900 dark:text-white">
                             {s.name}
                           </p>
-                          <p className="text-xs text-gray-500">@{s.username}</p>
+                          <p className="text-xs text-slate-500 dark:text-gray-500">@{s.username}</p>
                         </div>
                         <FiChevronRight className="text-gray-600" />
                       </button>
@@ -597,7 +599,7 @@ export default function AdminDashboard() {
                   transition={{ delay: 0.8 }}
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-bold text-white">Teachers</h3>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white">Teachers</h3>
                     <button
                       onClick={() => setActiveTab("teachers")}
                       className="text-xs text-amber-400 hover:text-amber-300"
@@ -613,14 +615,14 @@ export default function AdminDashboard() {
                           setActiveTab("teachers");
                           handleSelectUser(t);
                         }}
-                        className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition text-left"
+                        className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-white/50 dark:bg-white/5 transition text-left"
                       >
                         <span className="text-lg">{t.avatar}</span>
                         <div className="flex-1">
-                          <p className="text-sm font-semibold text-white">
+                          <p className="text-sm font-semibold text-slate-900 dark:text-white">
                             {t.name}
                           </p>
-                          <p className="text-xs text-gray-500">{t.subject}</p>
+                          <p className="text-xs text-slate-500 dark:text-gray-500">{t.subject}</p>
                         </div>
                         <FiChevronRight className="text-gray-600" />
                       </button>
@@ -640,18 +642,18 @@ export default function AdminDashboard() {
               exit={{ opacity: 0, y: -20 }}
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   🎓 Students ({students.length})
                 </h2>
                 <div className="flex gap-3">
                   <div className="relative">
-                    <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+                    <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-gray-500" />
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search..."
-                      className="pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:border-amber-500 w-56"
+                      className="pl-10 pr-4 py-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-sm placeholder-gray-500 focus:border-amber-500 w-56"
                     />
                   </div>
                   <motion.button
@@ -666,7 +668,7 @@ export default function AdminDashboard() {
                       });
                       setShowAddModal(true);
                     }}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold text-sm"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-slate-900 dark:text-white font-semibold text-sm"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -685,7 +687,7 @@ export default function AdminDashboard() {
                   >
                     <button
                       onClick={() => setSelectedUser(null)}
-                      className="flex items-center gap-2 text-gray-400 hover:text-white mb-4 transition"
+                      className="flex items-center gap-2 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white mb-4 transition"
                     >
                       <FiArrowLeft /> Back to list
                     </button>
@@ -694,10 +696,10 @@ export default function AdminDashboard() {
                         {selectedUser.avatar}
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-white">
+                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                           {selectedUser.name}
                         </h3>
-                        <p className="text-gray-400">
+                        <p className="text-slate-600 dark:text-gray-400">
                           @{selectedUser.username}
                         </p>
                       </div>
@@ -719,7 +721,7 @@ export default function AdminDashboard() {
 
                     {/* Student Results */}
                     <div className="glass rounded-2xl p-6">
-                      <h4 className="text-lg font-bold text-white mb-4">
+                      <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                         Results ({selectedUserResults.length})
                       </h4>
                       {selectedUserResults.length > 0 ? (
@@ -736,7 +738,7 @@ export default function AdminDashboard() {
                                 className={`rounded-xl border transition-all ${
                                   isExpanded
                                     ? "border-amber-500/30 bg-amber-500/5"
-                                    : "border-white/5 bg-white/[0.02]"
+                                    : "border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02]"
                                 }`}
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -764,10 +766,10 @@ export default function AdminDashboard() {
                                     )}
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <p className="font-semibold text-white text-sm truncate">
+                                    <p className="font-semibold text-slate-900 dark:text-white text-sm truncate">
                                       {r.taskName}
                                     </p>
-                                    <p className="text-xs text-gray-500">
+                                    <p className="text-xs text-slate-500 dark:text-gray-500">
                                       {r.subject} • {r.createdAt}
                                     </p>
                                   </div>
@@ -775,7 +777,7 @@ export default function AdminDashboard() {
                                     {r.marks}/{r.totalMarks}
                                   </p>
                                   <FiChevronRight
-                                    className={`text-gray-500 transition-transform ${isExpanded ? "rotate-90" : ""}`}
+                                    className={`text-slate-500 dark:text-gray-500 transition-transform ${isExpanded ? "rotate-90" : ""}`}
                                   />
                                 </button>
                                 <AnimatePresence>
@@ -786,18 +788,18 @@ export default function AdminDashboard() {
                                       exit={{ height: 0, opacity: 0 }}
                                       className="overflow-hidden"
                                     >
-                                      <div className="px-4 pb-4 pt-2 border-t border-white/5">
+                                      <div className="px-4 pb-4 pt-2 border-t border-slate-200 dark:border-white/5">
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
                                           <div>
-                                            <p className="text-xs text-gray-500">
+                                            <p className="text-xs text-slate-500 dark:text-gray-500">
                                               Status
                                             </p>
-                                            <p className="text-sm font-semibold text-white">
+                                            <p className="text-sm font-semibold text-slate-900 dark:text-white">
                                               {r.status}
                                             </p>
                                           </div>
                                           <div>
-                                            <p className="text-xs text-gray-500">
+                                            <p className="text-xs text-slate-500 dark:text-gray-500">
                                               Percentage
                                             </p>
                                             <p
@@ -807,7 +809,7 @@ export default function AdminDashboard() {
                                             </p>
                                           </div>
                                           <div>
-                                            <p className="text-xs text-gray-500">
+                                            <p className="text-xs text-slate-500 dark:text-gray-500">
                                               Locked
                                             </p>
                                             <p
@@ -817,7 +819,7 @@ export default function AdminDashboard() {
                                             </p>
                                           </div>
                                           <div>
-                                            <p className="text-xs text-gray-500">
+                                            <p className="text-xs text-slate-500 dark:text-gray-500">
                                               Submission
                                             </p>
                                             <p className="text-sm text-gray-300 truncate">
@@ -852,7 +854,7 @@ export default function AdminDashboard() {
                           })}
                         </div>
                       ) : (
-                        <p className="text-gray-500 text-center py-4">
+                        <p className="text-slate-500 dark:text-gray-500 text-center py-4">
                           No results found
                         </p>
                       )}
@@ -901,24 +903,24 @@ export default function AdminDashboard() {
                                 {s.avatar}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="font-bold text-white truncate">
+                                <p className="font-bold text-slate-900 dark:text-white truncate">
                                   {s.name}
                                 </p>
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-slate-500 dark:text-gray-500">
                                   @{s.username}
                                 </p>
                               </div>
                               <FiChevronRight className="text-gray-600 group-hover:text-amber-400 transition" />
                             </div>
-                            <div className="flex gap-4 mt-4 pt-4 border-t border-white/5">
+                            <div className="flex gap-4 mt-4 pt-4 border-t border-slate-200 dark:border-white/5">
                               <div>
-                                <p className="text-xs text-gray-500">Tasks</p>
-                                <p className="font-bold text-white text-sm">
+                                <p className="text-xs text-slate-500 dark:text-gray-500">Tasks</p>
+                                <p className="font-bold text-slate-900 dark:text-white text-sm">
                                   {sResults.length}
                                 </p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-slate-500 dark:text-gray-500">
                                   Completed
                                 </p>
                                 <p className="font-bold text-emerald-400 text-sm">
@@ -926,7 +928,7 @@ export default function AdminDashboard() {
                                 </p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-500">Average</p>
+                                <p className="text-xs text-slate-500 dark:text-gray-500">Average</p>
                                 <p
                                   className={`font-bold text-sm ${avg >= 70 ? "text-emerald-400" : avg >= 50 ? "text-amber-400" : "text-red-400"}`}
                                 >
@@ -953,7 +955,7 @@ export default function AdminDashboard() {
               exit={{ opacity: 0, y: -20 }}
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   👨‍🏫 Teachers ({teachers.length})
                 </h2>
                 <motion.button
@@ -968,7 +970,7 @@ export default function AdminDashboard() {
                     });
                     setShowAddModal(true);
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold text-sm"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-slate-900 dark:text-white font-semibold text-sm"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -986,7 +988,7 @@ export default function AdminDashboard() {
                   >
                     <button
                       onClick={() => setSelectedUser(null)}
-                      className="flex items-center gap-2 text-gray-400 hover:text-white mb-4 transition"
+                      className="flex items-center gap-2 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white mb-4 transition"
                     >
                       <FiArrowLeft /> Back to list
                     </button>
@@ -995,10 +997,10 @@ export default function AdminDashboard() {
                         {selectedUser.avatar}
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-white">
+                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                           {selectedUser.name}
                         </h3>
-                        <p className="text-gray-400">
+                        <p className="text-slate-600 dark:text-gray-400">
                           {selectedUser.subject} • @{selectedUser.username}
                         </p>
                       </div>
@@ -1019,7 +1021,7 @@ export default function AdminDashboard() {
                     </div>
 
                     <div className="glass rounded-2xl p-6">
-                      <h4 className="text-lg font-bold text-white mb-4">
+                      <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                         Uploaded Results ({selectedUserResults.length})
                       </h4>
                       {selectedUserResults.length > 0 ? (
@@ -1035,21 +1037,21 @@ export default function AdminDashboard() {
                             return (
                               <div
                                 key={r.id}
-                                className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5"
+                                className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5"
                               >
                                 <span className="text-lg">
                                   {student?.avatar || "👤"}
                                 </span>
                                 <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-semibold text-white truncate">
+                                  <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
                                     {student?.name} — {r.taskName}
                                   </p>
-                                  <p className="text-xs text-gray-500">
+                                  <p className="text-xs text-slate-500 dark:text-gray-500">
                                     {r.subject} • {r.createdAt}
                                   </p>
                                 </div>
                                 <div className="text-right">
-                                  <p className="text-sm font-bold text-white">
+                                  <p className="text-sm font-bold text-slate-900 dark:text-white">
                                     {r.marks}/{r.totalMarks}
                                   </p>
                                   <p
@@ -1061,13 +1063,13 @@ export default function AdminDashboard() {
                                 <div className="flex gap-1">
                                   <button
                                     onClick={() => setEditingResult({ ...r })}
-                                    className="p-1.5 rounded-lg hover:bg-amber-500/20 text-gray-500 hover:text-amber-400 transition text-xs"
+                                    className="p-1.5 rounded-lg hover:bg-amber-500/20 text-slate-500 dark:text-gray-500 hover:text-amber-400 transition text-xs"
                                   >
                                     <FiEdit2 />
                                   </button>
                                   <button
                                     onClick={() => handleDeleteResult(r.id)}
-                                    className="p-1.5 rounded-lg hover:bg-red-500/20 text-gray-500 hover:text-red-400 transition text-xs"
+                                    className="p-1.5 rounded-lg hover:bg-red-500/20 text-slate-500 dark:text-gray-500 hover:text-red-400 transition text-xs"
                                   >
                                     <FiTrash2 />
                                   </button>
@@ -1077,7 +1079,7 @@ export default function AdminDashboard() {
                           })}
                         </div>
                       ) : (
-                        <p className="text-gray-500 text-center py-4">
+                        <p className="text-slate-500 dark:text-gray-500 text-center py-4">
                           No results uploaded yet
                         </p>
                       )}
@@ -1114,7 +1116,7 @@ export default function AdminDashboard() {
                                 {t.avatar}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="font-bold text-white truncate">
+                                <p className="font-bold text-slate-900 dark:text-white truncate">
                                   {t.name}
                                 </p>
                                 <p className="text-xs text-violet-400">
@@ -1123,15 +1125,15 @@ export default function AdminDashboard() {
                               </div>
                               <FiChevronRight className="text-gray-600 group-hover:text-amber-400 transition" />
                             </div>
-                            <div className="flex gap-4 mt-4 pt-4 border-t border-white/5">
+                            <div className="flex gap-4 mt-4 pt-4 border-t border-slate-200 dark:border-white/5">
                               <div>
-                                <p className="text-xs text-gray-500">Results</p>
-                                <p className="font-bold text-white text-sm">
+                                <p className="text-xs text-slate-500 dark:text-gray-500">Results</p>
+                                <p className="font-bold text-slate-900 dark:text-white text-sm">
                                   {tResults.length}
                                 </p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-slate-500 dark:text-gray-500">
                                   Students
                                 </p>
                                 <p className="font-bold text-violet-400 text-sm">
@@ -1168,12 +1170,12 @@ export default function AdminDashboard() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-xl font-bold text-white mb-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
                 Add {newUser.role === "student" ? "Student" : "Teacher"}
               </h2>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Full Name *
                   </label>
                   <input
@@ -1182,12 +1184,12 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setNewUser({ ...newUser, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-gray-500 focus:border-amber-500"
                     placeholder="John Doe"
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Username *
                   </label>
                   <input
@@ -1196,12 +1198,12 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setNewUser({ ...newUser, username: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-gray-500 focus:border-amber-500"
                     placeholder="johndoe"
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Password *
                   </label>
                   <input
@@ -1210,13 +1212,13 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setNewUser({ ...newUser, password: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-gray-500 focus:border-amber-500"
                     placeholder="password123"
                   />
                 </div>
                 {newUser.role === "teacher" && (
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Subject *
                     </label>
                     <input
@@ -1225,13 +1227,13 @@ export default function AdminDashboard() {
                       onChange={(e) =>
                         setNewUser({ ...newUser, subject: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-amber-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-gray-500 focus:border-amber-500"
                       placeholder="Math"
                     />
                   </div>
                 )}
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Avatar Emoji
                   </label>
                   <input
@@ -1240,7 +1242,7 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setNewUser({ ...newUser, avatar: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-gray-500 focus:border-amber-500"
                     placeholder="🦁"
                   />
                 </div>
@@ -1248,13 +1250,13 @@ export default function AdminDashboard() {
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setShowAddModal(false)}
-                  className="flex-1 py-3 rounded-xl border border-white/10 text-gray-400 font-semibold hover:bg-white/5 transition"
+                  className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 font-semibold hover:bg-white/50 dark:bg-white/5 transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleAddUser}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-slate-900 dark:text-white font-semibold"
                 >
                   Add User
                 </button>
@@ -1281,10 +1283,10 @@ export default function AdminDashboard() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-xl font-bold text-white mb-6">Edit User</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Edit User</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Full Name
                   </label>
                   <input
@@ -1293,11 +1295,11 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setEditingUser({ ...editingUser, name: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Username
                   </label>
                   <input
@@ -1309,11 +1311,11 @@ export default function AdminDashboard() {
                         username: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Password
                   </label>
                   <input
@@ -1325,12 +1327,12 @@ export default function AdminDashboard() {
                         password: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                   />
                 </div>
                 {editingUser.role === "teacher" && (
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Subject
                     </label>
                     <input
@@ -1342,12 +1344,12 @@ export default function AdminDashboard() {
                           subject: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                     />
                   </div>
                 )}
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Avatar
                   </label>
                   <input
@@ -1356,20 +1358,20 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setEditingUser({ ...editingUser, avatar: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                   />
                 </div>
               </div>
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setEditingUser(null)}
-                  className="flex-1 py-3 rounded-xl border border-white/10 text-gray-400 font-semibold hover:bg-white/5 transition"
+                  className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 font-semibold hover:bg-white/50 dark:bg-white/5 transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleUpdateUser}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-slate-900 dark:text-white font-semibold"
                 >
                   Save
                 </button>
@@ -1396,10 +1398,10 @@ export default function AdminDashboard() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-xl font-bold text-white mb-6">Edit Result</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Edit Result</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Task Name
                   </label>
                   <input
@@ -1411,12 +1413,12 @@ export default function AdminDashboard() {
                         taskName: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Marks
                     </label>
                     <input
@@ -1428,11 +1430,11 @@ export default function AdminDashboard() {
                           marks: Number(e.target.value),
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                     />
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Total Marks
                     </label>
                     <input
@@ -1444,13 +1446,13 @@ export default function AdminDashboard() {
                           totalMarks: Number(e.target.value),
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                     />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Status
                     </label>
                     <select
@@ -1464,7 +1466,7 @@ export default function AdminDashboard() {
                             | "notcompleted",
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                     >
                       <option value="completed" className="bg-gray-900">
                         Completed
@@ -1478,7 +1480,7 @@ export default function AdminDashboard() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Locked
                     </label>
                     <button
@@ -1499,7 +1501,7 @@ export default function AdminDashboard() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Subject
                   </label>
                   <input
@@ -1511,11 +1513,11 @@ export default function AdminDashboard() {
                         subject: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Student Submission
                   </label>
                   <textarea
@@ -1527,20 +1529,20 @@ export default function AdminDashboard() {
                       })
                     }
                     rows={3}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-500 resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-amber-500 resize-none"
                   />
                 </div>
               </div>
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setEditingResult(null)}
-                  className="flex-1 py-3 rounded-xl border border-white/10 text-gray-400 font-semibold hover:bg-white/5 transition"
+                  className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 font-semibold hover:bg-white/50 dark:bg-white/5 transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleUpdateResult}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-semibold"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-slate-900 dark:text-white font-semibold"
                 >
                   Save
                 </button>

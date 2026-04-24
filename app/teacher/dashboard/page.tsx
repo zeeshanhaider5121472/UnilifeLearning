@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   createResult,
   deleteResult,
@@ -292,27 +293,30 @@ export default function TeacherDashboard() {
     <div className="min-h-screen animated-bg flex">
       {/* Sidebar */}
       <motion.aside
-        className="w-80 glass-strong border-r border-white/5 flex flex-col h-screen sticky top-0"
+        className="w-80 glass-strong border-r border-slate-200 dark:border-white/5 flex flex-col h-screen sticky top-0"
         initial={{ x: -320 }}
         animate={{ x: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <div className="p-6 border-b border-white/5">
+        <div className="p-6 border-b border-slate-200 dark:border-white/5">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-lg">
               {user.avatar || "👨‍🏫"}
             </div>
             <div>
-              <h2 className="font-bold text-white">{user.name}</h2>
+              <h2 className="font-bold text-slate-900 dark:text-white">
+                {user.name}
+              </h2>
               <p className="text-xs text-violet-400">{user.subject} Teacher</p>
             </div>
+          <ThemeToggle />
           </div>
           <button
             onClick={() => {
               logout();
               router.push("/");
             }}
-            className="flex items-center gap-2 text-sm text-gray-400 hover:text-red-400 transition-colors"
+            className="flex items-center gap-2 text-sm text-slate-600 dark:text-gray-400 hover:text-red-400 transition-colors"
           >
             <FiLogOut /> Sign Out
           </button>
@@ -320,16 +324,16 @@ export default function TeacherDashboard() {
 
         <div className="p-4">
           <div className="relative mb-4">
-            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-gray-500" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search students..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:border-violet-500"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-sm placeholder-gray-500 focus:border-violet-500"
             />
           </div>
-          <p className="text-xs text-gray-500 mb-2 px-2">
+          <p className="text-xs text-slate-500 dark:text-gray-500 mb-2 px-2">
             STUDENTS ({filteredStudents.length})
           </p>
         </div>
@@ -341,8 +345,8 @@ export default function TeacherDashboard() {
               onClick={() => handleSelectStudent(s)}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 mb-1 ${
                 selectedStudent?.id === s.id
-                  ? "bg-violet-600/20 border border-violet-500/30 text-white"
-                  : "hover:bg-white/5 text-gray-400 hover:text-white"
+                  ? "bg-violet-600/20 border border-violet-500/30 text-slate-900 dark:text-white"
+                  : "hover:bg-white/50 dark:bg-white/5 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:text-white"
               }`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -353,7 +357,9 @@ export default function TeacherDashboard() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-sm truncate">{s.name}</p>
-                <p className="text-xs text-gray-500">@{s.username}</p>
+                <p className="text-xs text-slate-500 dark:text-gray-500">
+                  @{s.username}
+                </p>
               </div>
               <FiChevronRight className="text-gray-600" />
             </motion.button>
@@ -373,16 +379,16 @@ export default function TeacherDashboard() {
               exit={{ opacity: 0, scale: 0.9 }}
             >
               <div className="text-6xl mb-4">📐</div>
-              <h2 className="text-2xl font-bold text-white mb-2">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
                 Select a Student
               </h2>
-              <p className="text-gray-400 mb-8">
+              <p className="text-slate-600 dark:text-gray-400 mb-8">
                 Choose a student from the sidebar to view their {user.subject}{" "}
                 results
               </p>
               <motion.button
                 onClick={() => setShowAddModal(true)}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-slate-900 dark:text-white font-semibold"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -403,17 +409,17 @@ export default function TeacherDashboard() {
                     {selectedStudent.avatar || "👤"}
                   </div>
                   <div>
-                    <h1 className="text-2xl font-bold text-white">
+                    <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
                       {selectedStudent.name}
                     </h1>
-                    <p className="text-gray-400">
+                    <p className="text-slate-600 dark:text-gray-400">
                       {user.subject} — {results.length} tasks
                     </p>
                   </div>
                 </div>
                 <motion.button
                   onClick={() => setShowAddModal(true)}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold hover:shadow-lg hover:shadow-violet-500/25 transition-all"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-slate-900 dark:text-white font-semibold hover:shadow-lg hover:shadow-violet-500/25 transition-all"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -463,17 +469,17 @@ export default function TeacherDashboard() {
                     }}
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs text-gray-500 uppercase tracking-wider">
+                      <span className="text-xs text-slate-500 dark:text-gray-500 uppercase tracking-wider">
                         {stat.label}
                       </span>
                       <div
-                        className={`w-8 h-8 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center text-white text-sm`}
+                        className={`w-8 h-8 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center text-slate-900 dark:text-white text-sm`}
                       >
                         {stat.icon}
                       </div>
                     </div>
                     <p
-                      className={`text-2xl font-bold ${stat.label === "Grade" ? getGrade(avgPct).color : "text-white"}`}
+                      className={`text-2xl font-bold ${stat.label === "Grade" ? getGrade(avgPct).color : "text-slate-900 dark:text-white"}`}
                     >
                       {stat.value}
                     </p>
@@ -489,7 +495,7 @@ export default function TeacherDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     Performance Trend
                   </h3>
                   {chartData.length > 0 ? (
@@ -525,7 +531,7 @@ export default function TeacherDashboard() {
                       </BarChart>
                     </ResponsiveContainer>
                   ) : (
-                    <div className="h-[250px] flex items-center justify-center text-gray-500">
+                    <div className="h-[250px] flex items-center justify-center text-slate-500 dark:text-gray-500">
                       No data yet
                     </div>
                   )}
@@ -537,7 +543,7 @@ export default function TeacherDashboard() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <h3 className="text-lg font-bold text-white mb-4">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                     Status Breakdown
                   </h3>
                   {statusData.length > 0 ? (
@@ -571,7 +577,7 @@ export default function TeacherDashboard() {
                         {statusData.map((d, i) => (
                           <div
                             key={i}
-                            className="flex items-center gap-1.5 text-xs text-gray-400"
+                            className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-gray-400"
                           >
                             <div
                               className="w-2.5 h-2.5 rounded-full"
@@ -583,7 +589,7 @@ export default function TeacherDashboard() {
                       </div>
                     </>
                   ) : (
-                    <div className="h-[200px] flex items-center justify-center text-gray-500">
+                    <div className="h-[200px] flex items-center justify-center text-slate-500 dark:text-gray-500">
                       No data
                     </div>
                   )}
@@ -597,7 +603,7 @@ export default function TeacherDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                <h3 className="text-lg font-bold text-white mb-4">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
                   {user.subject} Tasks ({results.length})
                 </h3>
                 <div className="space-y-3">
@@ -611,7 +617,7 @@ export default function TeacherDashboard() {
                         className={`rounded-xl border transition-all duration-300 ${
                           isExpanded
                             ? "border-violet-500/30 bg-violet-500/5"
-                            : "border-white/5 bg-white/[0.02] hover:bg-white/5"
+                            : "border-slate-200 dark:border-white/5 bg-slate-50 dark:bg-white/[0.02] hover:bg-white/50 dark:bg-white/5"
                         }`}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -641,10 +647,10 @@ export default function TeacherDashboard() {
                             )}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-white truncate">
+                            <p className="font-semibold text-slate-900 dark:text-white truncate">
                               {r.taskName}
                             </p>
-                            <p className="text-xs text-gray-500">
+                            <p className="text-xs text-slate-500 dark:text-gray-500">
                               {r.createdAt}
                             </p>
                           </div>
@@ -657,7 +663,7 @@ export default function TeacherDashboard() {
                             </p>
                           </div>
                           <motion.div animate={{ rotate: isExpanded ? 90 : 0 }}>
-                            <FiChevronRight className="text-gray-500" />
+                            <FiChevronRight className="text-slate-500 dark:text-gray-500" />
                           </motion.div>
                         </button>
 
@@ -669,10 +675,10 @@ export default function TeacherDashboard() {
                               exit={{ height: 0, opacity: 0 }}
                               className="overflow-hidden"
                             >
-                              <div className="px-4 pb-4 border-t border-white/5 pt-4">
+                              <div className="px-4 pb-4 border-t border-slate-200 dark:border-white/5 pt-4">
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                                   <div>
-                                    <p className="text-xs text-gray-500 mb-1">
+                                    <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                       Status
                                     </p>
                                     <span
@@ -688,7 +694,7 @@ export default function TeacherDashboard() {
                                     </span>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500 mb-1">
+                                    <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                       Locked
                                     </p>
                                     <span
@@ -698,7 +704,7 @@ export default function TeacherDashboard() {
                                     </span>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500 mb-1">
+                                    <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                       Percentage
                                     </p>
                                     <div className="w-full h-2 rounded-full bg-white/10 mt-1.5">
@@ -709,7 +715,7 @@ export default function TeacherDashboard() {
                                     </div>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-500 mb-1">
+                                    <p className="text-xs text-slate-500 dark:text-gray-500 mb-1">
                                       Submission
                                     </p>
                                     <p className="text-xs text-gray-300 truncate">
@@ -720,13 +726,13 @@ export default function TeacherDashboard() {
 
                                 {r.screenshot && (
                                   <div className="mb-4">
-                                    <p className="text-xs text-gray-500 mb-2">
+                                    <p className="text-xs text-slate-500 dark:text-gray-500 mb-2">
                                       Screenshot
                                     </p>
                                     <img
                                       src={r.screenshot}
                                       alt="screenshot"
-                                      className="max-w-xs rounded-xl border border-white/10"
+                                      className="max-w-xs rounded-xl border border-slate-200 dark:border-white/10"
                                     />
                                   </div>
                                 )}
@@ -753,7 +759,7 @@ export default function TeacherDashboard() {
                     );
                   })}
                   {results.length === 0 && (
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-8 text-slate-500 dark:text-gray-500">
                       No tasks yet. Click &quot;New Task&quot; to create one.
                     </div>
                   )}
@@ -785,14 +791,14 @@ export default function TeacherDashboard() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-xl font-bold text-white mb-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
                 New {user?.subject} Task
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Left Column - Task Details */}
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Task Name *
                     </label>
                     <input
@@ -801,13 +807,13 @@ export default function TeacherDashboard() {
                       onChange={(e) =>
                         setNewTask({ ...newTask, taskName: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-violet-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-gray-500 focus:border-violet-500"
                       placeholder="e.g. Algebra Quiz 2"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-gray-400 mb-1 block">
+                      <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                         Marks Obtained
                       </label>
                       <input
@@ -819,11 +825,11 @@ export default function TeacherDashboard() {
                             marks: Number(e.target.value),
                           })
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-violet-500"
+                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-violet-500"
                       />
                     </div>
                     <div>
-                      <label className="text-sm text-gray-400 mb-1 block">
+                      <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                         Total Marks
                       </label>
                       <input
@@ -835,13 +841,13 @@ export default function TeacherDashboard() {
                             totalMarks: Number(e.target.value),
                           })
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-violet-500"
+                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-violet-500"
                       />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm text-gray-400 mb-1 block">
+                      <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                         Status
                       </label>
                       <select
@@ -855,7 +861,7 @@ export default function TeacherDashboard() {
                               | "notcompleted",
                           })
                         }
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-violet-500"
+                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-violet-500"
                       >
                         <option value="completed" className="bg-gray-900">
                           Completed
@@ -869,7 +875,7 @@ export default function TeacherDashboard() {
                       </select>
                     </div>
                     <div>
-                      <label className="text-sm text-gray-400 mb-1 block">
+                      <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                         Lock Student Edits
                       </label>
                       <button
@@ -887,10 +893,10 @@ export default function TeacherDashboard() {
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Screenshot (optional)
                     </label>
-                    <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-400 cursor-pointer hover:border-violet-500 transition">
+                    <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 cursor-pointer hover:border-violet-500 transition">
                       <FiUpload />
                       <span className="text-sm">Upload Image</span>
                       <input
@@ -904,7 +910,7 @@ export default function TeacherDashboard() {
                       <img
                         src={newTask.screenshot}
                         alt="preview"
-                        className="mt-2 max-w-xs rounded-xl border border-white/10 h-24 object-cover"
+                        className="mt-2 max-w-xs rounded-xl border border-slate-200 dark:border-white/10 h-24 object-cover"
                       />
                     )}
                   </div>
@@ -912,7 +918,7 @@ export default function TeacherDashboard() {
 
                 {/* Right Column - Student Multi-Select */}
                 <div className="flex flex-col">
-                  <label className="text-sm text-gray-400 mb-2 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-2 block">
                     Assign to Students *
                     <span className="text-violet-400 ml-2">
                       ({selectedStudentsForTask.size} selected)
@@ -921,13 +927,13 @@ export default function TeacherDashboard() {
 
                   {/* Search inside modal */}
                   <div className="relative mb-3">
-                    <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+                    <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-gray-500" />
                     <input
                       type="text"
                       value={modalStudentSearch}
                       onChange={(e) => setModalStudentSearch(e.target.value)}
                       placeholder="Search students..."
-                      className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:border-violet-500"
+                      className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white text-sm placeholder-gray-500 focus:border-violet-500"
                     />
                   </div>
 
@@ -940,13 +946,13 @@ export default function TeacherDashboard() {
                         );
                         setSelectedStudentsForTask(allIds);
                       }}
-                      className="flex-1 text-xs py-2 rounded-lg border border-white/10 text-gray-400 hover:bg-white/5 transition"
+                      className="flex-1 text-xs py-2 rounded-lg border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 hover:bg-white/50 dark:bg-white/5 transition"
                     >
                       Select All
                     </button>
                     <button
                       onClick={() => setSelectedStudentsForTask(new Set())}
-                      className="flex-1 text-xs py-2 rounded-lg border border-white/10 text-gray-400 hover:bg-white/5 transition"
+                      className="flex-1 text-xs py-2 rounded-lg border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 hover:bg-white/50 dark:bg-white/5 transition"
                     >
                       Clear All
                     </button>
@@ -960,7 +966,7 @@ export default function TeacherDashboard() {
                         className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all ${
                           selectedStudentsForTask.has(student.id)
                             ? "bg-violet-600/20 border border-violet-500/30"
-                            : "border border-transparent hover:bg-white/5"
+                            : "border border-transparent hover:bg-white/50 dark:bg-white/5"
                         }`}
                         whileTap={{ scale: 0.98 }}
                       >
@@ -974,10 +980,10 @@ export default function TeacherDashboard() {
                           {student.avatar || "👤"}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium text-white truncate">
+                          <p className="text-sm font-medium text-slate-900 dark:text-white truncate">
                             {student.name}
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-slate-500 dark:text-gray-500">
                             @{student.username}
                           </p>
                         </div>
@@ -987,7 +993,7 @@ export default function TeacherDashboard() {
                       </motion.label>
                     ))}
                     {filteredModalStudents.length === 0 && (
-                      <p className="text-sm text-gray-500 text-center py-4">
+                      <p className="text-sm text-slate-500 dark:text-gray-500 text-center py-4">
                         No students found
                       </p>
                     )}
@@ -996,21 +1002,21 @@ export default function TeacherDashboard() {
               </div>
 
               {/* Modal Footer */}
-              <div className="flex gap-3 mt-6 pt-6 border-t border-white/5">
+              <div className="flex gap-3 mt-6 pt-6 border-t border-slate-200 dark:border-white/5">
                 <button
                   onClick={() => {
                     setShowAddModal(false);
                     setSelectedStudentsForTask(new Set());
                     setModalStudentSearch("");
                   }}
-                  className="flex-1 py-3 rounded-xl border border-white/10 text-gray-400 font-semibold hover:bg-white/5 transition"
+                  className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 font-semibold hover:bg-white/50 dark:bg-white/5 transition"
                 >
                   Cancel
                 </button>
                 <motion.button
                   onClick={handleAddTask}
                   disabled={isLoading}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold hover:shadow-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-slate-900 dark:text-white font-semibold hover:shadow-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -1043,10 +1049,12 @@ export default function TeacherDashboard() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-xl font-bold text-white mb-6">Edit Task</h2>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
+                Edit Task
+              </h2>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Task Name
                   </label>
                   <input
@@ -1058,12 +1066,12 @@ export default function TeacherDashboard() {
                         taskName: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-violet-500"
+                    className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-violet-500"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Marks
                     </label>
                     <input
@@ -1075,11 +1083,11 @@ export default function TeacherDashboard() {
                           marks: Number(e.target.value),
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-violet-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-violet-500"
                     />
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Total Marks
                     </label>
                     <input
@@ -1091,13 +1099,13 @@ export default function TeacherDashboard() {
                           totalMarks: Number(e.target.value),
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-violet-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-violet-500"
                     />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Status
                     </label>
                     <select
@@ -1111,7 +1119,7 @@ export default function TeacherDashboard() {
                             | "notcompleted",
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:border-violet-500"
+                      className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:border-violet-500"
                     >
                       <option value="completed" className="bg-gray-900">
                         Completed
@@ -1125,7 +1133,7 @@ export default function TeacherDashboard() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-400 mb-1 block">
+                    <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                       Lock Student Edits
                     </label>
                     <button
@@ -1146,10 +1154,10 @@ export default function TeacherDashboard() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm text-gray-400 mb-1 block">
+                  <label className="text-sm text-slate-600 dark:text-gray-400 mb-1 block">
                     Screenshot
                   </label>
-                  <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-400 cursor-pointer hover:border-violet-500 transition">
+                  <label className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 cursor-pointer hover:border-violet-500 transition">
                     <FiUpload />
                     <span className="text-sm">Change Image</span>
                     <input
@@ -1163,7 +1171,7 @@ export default function TeacherDashboard() {
                     <img
                       src={editingResult.screenshot}
                       alt="preview"
-                      className="mt-2 max-w-xs rounded-xl border border-white/10"
+                      className="mt-2 max-w-xs rounded-xl border border-slate-200 dark:border-white/10"
                     />
                   )}
                 </div>
@@ -1171,13 +1179,13 @@ export default function TeacherDashboard() {
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setEditingResult(null)}
-                  className="flex-1 py-3 rounded-xl border border-white/10 text-gray-400 font-semibold hover:bg-white/5 transition"
+                  className="flex-1 py-3 rounded-xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-gray-400 font-semibold hover:bg-white/50 dark:bg-white/5 transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleUpdateTask}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-white font-semibold"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-cyan-600 text-slate-900 dark:text-white font-semibold"
                 >
                   Save Changes
                 </button>
