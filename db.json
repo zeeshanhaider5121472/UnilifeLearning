@@ -1,13 +1,19 @@
 {
   "users": [
     {
-      "id": 1,
-      "username": "admin",
-      "password": "admin123",
-      "role": "admin",
-      "name": "Admin User",
-      "subject": "",
-      "avatar": "🛡️"
+      "studentId": 5,
+      "teacherId": 2,
+      "subject": "Math",
+      "taskName": "Algebra Quiz 1",
+      "marks": 85,
+      "totalMarks": 100,
+      "status": "completed",
+      "locked": true,
+      "screenshot": "",
+      "studentSubmission": "Completed all algebra problems",
+      "submissionType": "text",
+      "createdAt": "2024-01-15",
+      "id": 1
     },
     {
       "id": 2,
